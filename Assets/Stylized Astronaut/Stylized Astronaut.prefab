@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4268597916284530}
   - component: {fileID: 95340733316770424}
   - component: {fileID: 143350241100547368}
+  - component: {fileID: 1877945694959636784}
   - component: {fileID: 114551384804589004}
   m_Layer: 0
   m_Name: Stylized Astronaut
@@ -195,6 +196,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.125, z: -0.01}
+--- !u!114 &1877945694959636784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147752367711628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02911007638270649bb7952002a0f4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 0}
+  distance: 5
 --- !u!114 &114551384804589004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,12 +220,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1147752367711628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e19da6a22259d4299a67d51a3c65f7, type: 3}
+  m_Script: {fileID: 11500000, guid: c81e61b159f38454c914dc1f5c2bb768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  turnSpeed: 150
-  gravity: 20
+  speed: 600
+  turnSpeed: 400
+  gravity: 0
 --- !u!1 &1158021920011488
 GameObject:
   m_ObjectHideFlags: 0
