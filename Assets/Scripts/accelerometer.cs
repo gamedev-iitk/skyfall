@@ -1,36 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
-public class playerMotor : MonoBehaviour
+public class accelerometer : MonoBehaviour
 {
-    CharacterController controller;
+    // Start is called before the first frame update
+ CharacterController controller;
     Vector3 moveVector;
     float speed = 2.0f;
     public bool isDead = false;
     public Transform target;
-    public GameObject pickupEffect;
-    public GameObject player;
-     private float zatstart = 0;
-     private float xatstart = 0;
+    Vector3 calibratedtilt = Vector3.zero;
+    
      // Start is called before the first frame update
      void Start()
     {
-        calib();
         controller=GetComponent<CharacterController>();
-        
-        
          
          
         
         
     }
-     void calib(){
-             xatstart = Input.acceleration.x;
-             zatstart = Input.acceleration.y;
-         }
-    
+     public void Calibrate()
+     {
+         //Gets devices physical rotation in 3D space
+         calibratedtilt.x = Input.acceleration.x;
+         calibratedtilt.z = 0;
+         calibratedtilt.y = Input.acceleration.y;
+     }
 
     // Update is called once per frame
     void Update()
@@ -46,12 +43,9 @@ public class playerMotor : MonoBehaviour
          }
 
         if(target.position.z>3.0f){
-        moveVector.x=(Input.acceleration.x-xatstart)*speed*2;
-        moveVector.y=(Input.acceleration.y-zatstart)*speed*2;
             
-       //moveVector.x=Input.GetAxisRaw("Horizontal")*speed/3;
-        
-        //moveVector.y=Input.GetAxisRaw("Vertical")*speed/3;
+         moveVector.x=(Input.acceleration.x-calibratedtilt.x)*speed*2;
+        moveVector.y=(Input.acceleration.y-calibratedtilt.y)*speed*2;
         }
         moveVector.z = speed;
 
@@ -72,24 +66,10 @@ public class playerMotor : MonoBehaviour
     {
         speed = 10.0f + modifier;
     }
-     private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (gameObject.tag=="cube")
-        {
-            return;
-        }
-        if ((hit.point.z > transform.position.z)) //&& ((CountdownTimer.temp%2)!=0) )
-        {
-            Death();
-        }
-        
-    }
    
     public void Death()
     {
         isDead = true;
-        Instantiate(pickupEffect, transform.position, transform.rotation);
-        Destroy(player);
         GetComponent<Score>().OnDeath();
     }
 }
